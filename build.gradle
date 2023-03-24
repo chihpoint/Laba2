@@ -1,23 +1,37 @@
-plugins {
-    id 'java'
+apply plugin: 'application'
+apply plugin: 'java'
+
+version '1.0'
+
+sourceSets {
+    main {
+        java {
+            srcDir '../src/main/java'
+            srcDir 'src/main/java'
+        }
+    }
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+//create a single Jar with all dependencies
+mainClassName = "com.chihpoint.Encryption"
 
+jar {
+    manifest {
+        attributes "Main-Class": "$mainClassName"
+    }
 
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation 'org.testng:testng:7.1.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-// https://mvnrepository.com/artifact/args4j/args4j
-    implementation group: 'args4j', name: 'args4j', version: '2.33'
-
 }
 
 test {

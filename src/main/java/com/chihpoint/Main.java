@@ -1,3 +1,5 @@
+package com.chihpoint;
+
 import java.io.IOException;
 
 public class Main {

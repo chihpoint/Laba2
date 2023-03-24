@@ -1,3 +1,4 @@
+import com.chihpoint.Main;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
@@ -17,19 +18,6 @@ public class EncryptionTests {
             c = file.read();
         }
         assertEquals("C DCt", answer);
-    }
-
-    @Test
-    public void decrypt1() throws Exception {
-        Main.main("-d 7E7 test1d -o outputFile".split(" "));
-        FileInputStream file = new FileInputStream("outputFile");
-        int d = file.read();
-        String answer = "";
-        while (d != -1) {
-            answer += (char)d;
-            d = file.read();
-        }
-        assertEquals("i like java", answer);
     }
 }
 

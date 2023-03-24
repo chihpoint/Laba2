@@ -1,3 +1,4 @@
+package com.chihpoint;//package com.chihpoint;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
@@ -5,9 +6,8 @@ import org.kohsuke.args4j.Option;
 
 import java.io.IOException;
 
-public class Parser {
-    @Option(name = "-c", usage = "Данил Сергеевич, поставьте 5, пожалуйста", forbids = {"-d"})
-    private String keyC;
+public class Parser {@Option(name = "-c", usage = "Данил Сергеевич, поставьте 5, пожалуйста", forbids = {"-d"})
+private String keyC;
     @Option(name = "-d", usage = "У вас крутые шутки!", forbids = {"-c"})
     private String keyD;
     @Option(name = "-o", usage = "Вы самый крутой!")
@@ -29,4 +29,5 @@ public class Parser {
         encryption.outFile(keyC,keyD,outputFile,inputFile);
 
     }
+
 }
