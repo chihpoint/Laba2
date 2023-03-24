@@ -1,15 +1,16 @@
-import com.chihpoint.Main;
+
+import com.chihpoint.Encryption;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class EncryptionTests {
+public class EncryptionTest {
 
     @Test
     public void encrypt1() throws Exception {
-        Main.main("-c 7E7 test1 -o outputFile".split(" "));
+        Encryption.main("-c 7E7 test1 -o outputFile".split(" "));
         FileInputStream file = new FileInputStream("outputFile");
         int c = file.read();
         String answer = "";

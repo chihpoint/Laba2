@@ -1,19 +1,16 @@
 package com.chihpoint;
 
+
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
-package com.chihpoint;
 
 import java.io.*;
 
 public class Encryption {
 
-    public static void main(String[] args) throws IOException {
-        Encryption enc = new Encryption();
-        enc.parser(args);
-    }
+
     @Option(name = "-c", usage = "Данил Сергеевич, поставьте 5, пожалуйста", forbids = {"-d"})
     private String keyC;
     @Option(name = "-d", usage = "У вас крутые шутки!", forbids = {"-c"})
@@ -35,7 +32,6 @@ public class Encryption {
         Encryption encryption = new Encryption();
 
         encryption.outFile(keyC,keyD,outputFile,inputFile);
-
     }
 
     public void fileReader(String pathFrom) throws FileNotFoundException {
@@ -77,6 +73,9 @@ public class Encryption {
         fileOutputStream.flush();
         fileOutputStream.close();
     }
-
+    public static void main(String[] args) throws IOException {
+        Encryption enc = new Encryption();
+        enc.parser(args);
+    }
 }
 
