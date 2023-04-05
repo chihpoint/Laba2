@@ -9,8 +9,6 @@ import org.kohsuke.args4j.Option;
 import java.io.*;
 
 public class Encryption {
-
-
     @Option(name = "-c", usage = "Данил Сергеевич, поставьте 5, пожалуйста", forbids = {"-d"})
     private String keyC;
     @Option(name = "-d", usage = "У вас крутые шутки!", forbids = {"-c"})
@@ -22,21 +20,20 @@ public class Encryption {
 
     public void parser(String[] args) throws IOException {
         CmdLineParser parser = new CmdLineParser(this);
+        Encryption encryption = new Encryption();
         try {
             parser.parseArgument(args);
+            if (args.length != 0) {
+                encryption.outFile(keyC, keyD, outputFile, inputFile);
+            } else {
+                System.out.println("Args doesn't exists");
+            }
         } catch (CmdLineException e) {
             System.err.println(e.getMessage());
             parser.printUsage(System.err);
         }
-
-        Encryption encryption = new Encryption();
-
-        encryption.outFile(keyC,keyD,outputFile,inputFile);
     }
 
-    public void fileReader(String pathFrom) throws FileNotFoundException {
-            FileReader reader = new FileReader(pathFrom);
-    }
 
     public byte[] encrypt(String text, String keyWord){
         byte[] textByte = text.getBytes();
@@ -64,11 +61,26 @@ public class Encryption {
     public void outFile(String keyC, String keyD, String outputFile, String inputFile) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(outputFile);
         String answer;
+        String text = "";
+        try {
+            File file = new File(inputFile);
+            BufferedReader input = new BufferedReader(new FileReader(file));
+            String line = input.readLine();
+            while (line != null) {
+                text += line;
+                line = input.readLine();
+            }
+        } catch (FileNotFoundException e){
+            System.out.println(e.getMessage());
+        }
         if (keyC != null){
-            fileOutputStream.write(encrypt(inputFile, keyC));
+            fileOutputStream.write(encrypt(text, keyC));
+        }
+        else if (keyD != null){
+            fileOutputStream.write(decrypt(text, keyD));
         }
         else {
-            fileOutputStream.write(decrypt(inputFile, keyD));
+            System.out.println("nulls");
         }
         fileOutputStream.flush();
         fileOutputStream.close();
@@ -78,4 +90,3 @@ public class Encryption {
         enc.parser(args);
     }
 }
-

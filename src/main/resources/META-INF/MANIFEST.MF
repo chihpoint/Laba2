@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-com.chihpoint.Main-Class: com.chihpoint.Main
+Main-Class: com.chihpoint.Encryption
 
